@@ -27,10 +27,10 @@ print "Format EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 print "Encrypt cryptsystem partition"
-echo -n "$password" | cryptsetup luksFormat --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/disk/by-partlabel/cryptsystem -d -
+echo -n "$PASSWORD" | cryptsetup luksFormat --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/disk/by-partlabel/cryptsystem -d -
 
 print "Descrypt cryptsystem partition"
-echo -n "$password" | cryptsetup open /dev/disk/by-partlabel/cryptsystem system -d -
+echo -n "$PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptsystem system -d -
 
 print "Encrypt swap"
 mkfs.ext2 -L cryptswap /dev/disk/by-partlabel/cryptswap 1M
@@ -123,9 +123,9 @@ arch-chroot /mnt timedatectl set-ntp 1
 arch-chroot /mnt hwclock --systohc
 
 print "Create user"
-arch-chroot /mnt useradd --create-home -G wheel "$USERNAME"
-echo "$USERNAME ALL=(ALL) ALL" >> /etc/sudoers.d/"$USERNAME"
-echo "$USERNAME:$password" | arch-chroot /mnt chpasswd
+arch-chroot /mnt useradd --create-home -G wheel "$USER"
+echo "$USER ALL=(ALL) ALL" >> /etc/sudoers.d/"$USER"
+echo "$USER:$PASSWORD" | arch-chroot /mnt chpasswd
 
 print "Getting an ip address"
 arch-chroot /mnt dhcpcd
