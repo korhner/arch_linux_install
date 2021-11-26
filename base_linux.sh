@@ -26,5 +26,5 @@ arch-chroot /mnt systemctl enable NetworkManager
 
 pretty_print "Configure initramfs"
 sed -i '/^HOOKS/ c HOOKS=(base udev autodetect consolefont keymap modconf keyboard block encrypt filesystems fsck)' /mnt/etc/mkinitcpio.conf
-sed -i '/^MODULES/ c MODULES=($MKINITCPIO_MUDOLES)' /mnt/etc/mkinitcpio.conf
+sed -i '/^MODULES/ c MODULES=($MKINITCPIO_MODULES)' /mnt/etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -p linux

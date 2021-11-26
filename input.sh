@@ -1,15 +1,27 @@
 #!/usr/bin/env bash
 
-source ./utils.sh
+########################################################################################################################
+# Interactive variables. To avoid asking for user input, add `export VARIABLE=<value>` before if condition
+########################################################################################################################
 
-# export PASSWORD=
-read_var_if_not_defined_sensitive "Insert password for LUKS and user" PASSWORD
+if [ -z "$DISK_NAME" ]
+then
+  lsblk -d
+  echo "Set full disk name. Check output of lsblk above. For example /dev/sda or /dev/nvme0n1"
+  read DISK_NAME
+  export DISK_NAME
+fi
 
-echo $(lsblk -dp)
-# export DISK_NAME=
-read_var_if_not_defined "Set full disk name. Check output of lsblk above. For example /dev/sda or /dev/nvme0n1" DISK_NAME
+if [ -z "$PASSWORD" ]
+then
+  echo "Insert password for LUKS disk encryption and user (you will not see it)"
+  read -s PASSWORD
+  export PASSWORD
+fi
 
-cat << EOF
+if [ -z "$SWAP_PARTITION_SIZE" ]
+then
+  cat << EOF
 Hibernation is not supported in this install script, so pick first column as recommendation
 https://itsfoss.com/swap-size/
 RAM Size    Swap Size (Without Hibernation)
@@ -28,35 +40,50 @@ RAM Size    Swap Size (Without Hibernation)
 64Gib        8Gib
 128Gib       11Gib
 EOF
-# export SWAP_PARTITION_SIZE=
-read_var_if_not_defined "Set swap partition size. Hibernation is not supported. Recommended to pick according to guide above" SWAP_PARTITION_SIZE
+  read -s SWAP_PARTITION_SIZE
+  export SWAP_PARTITION_SIZE
+fi
 
-# https://wiki.archlinux.org/title/microcode
-echo $(grep 'model name' /proc/cpuinfo)
-# export MICROCODE=
-read_var_if_not_defined "Enter microcode package. For intel cpus enter intel-ucode, for amd am-ucode. Check output of /proc/cpuinfo above" MICROCODE
+if [ -z "$MICROCODE" ]
+then
+  grep 'model name' /proc/cpuinfo
+  echo "Enter microcode package. For intel cpus enter intel-ucode, for amd am-ucode. Check output of /proc/cpuinfo above"
+  echo "Check https://wiki.archlinux.org/title/microcode for more details"
+  read MICROCODE
+  export MICROCODE
+fi
 
+if [ -z "$USER" ]
+then
+  echo "Set name of user"
+  read USER
+  export USER
+fi
 
-# export USER=
-read_var_if_not_defined "Set name of user" USER
+if [ -z "$HOSTNAME" ]
+then
+  echo "Set hostname"
+  read HOSTNAME
+  export HOSTNAME
+fi
 
-# export HOSTNAME=
-read_var_if_not_defined "Set hostname" HOSTNAME
-
-
+########################################################################################################################
+# non interactive assumptions
+########################################################################################################################
 # Space separated mkinitcpio modules. 
 # Check arch wiki guide for your system.
 # For example, x1 carbon needs i915
-export MKINITCPIO_MUDOLES="usb_storage thunderbolt"
+export MKINITCPIO_MODULES="usb_storage thunderbolt"
 
 export TIMEZONE="Europe/Belgrade"
 
-# runs partition_$FILESYSTEM.sh and mount_$FILESYSTEM.sh, replace if needed
+########################################################################################################################
+# modules of installation. edit those manually if not happy with defaults
+########################################################################################################################
+# runs partition_$FILESYSTEM.sh and mount_$FILESYSTEM.sh
 export FILESYSTEM=btrfs
-
-# runs boot_$BOOT.sh, replace if needed
+# runs boot_$BOOT.sh
 export BOOT=refind
-
-# runs desktop_$DESKTOP.sh, replace if needed
+# runs desktop_$DESKTOP.sh
 export DESKTOP=kde
 
