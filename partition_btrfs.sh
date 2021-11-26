@@ -41,9 +41,9 @@ pretty_print "Mount top level subvolume"
 mount -t btrfs LABEL=system /mnt
 
 pretty_print "Create subvolumes"
-btrfs subvolume create /mnt/root
-btrfs subvolume create /mnt/home
-btrfs subvolume create /mnt/snapshots
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@snapshots
 
 pretty_print "Mount subvolumes"
 umount -R /mnt
