@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source ./decrypt.sh
 
 o=defaults,x-mount.mkdir

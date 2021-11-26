@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # REQUIREMENTS:
 # - connect to internet (either cable or run `iwctl` for wifi. more on https://wiki.archlinux.org/title/Iwd#iwctl)
 

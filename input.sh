@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
+set -e
+
 ########################################################################################################################
 # Interactive variables. To avoid asking for user input, add `export VARIABLE=<value>` before if condition
 ########################################################################################################################
 
 if [ -z "$DISK_NAME" ]
 then
-  lsblk -d
-  echo "Set full disk name. Check output of lsblk above. For example /dev/sda or /dev/nvme0n1"
+  lsblk -p
+  echo "Enter full disk path for installation. Check output of lsblk above. For example /dev/sda or /dev/nvme0n1"
+  echo "Selected disk will be wiped and formatted!"
   read DISK_NAME
   export DISK_NAME
 fi
@@ -22,6 +25,8 @@ fi
 if [ -z "$SWAP_PARTITION_SIZE" ]
 then
   cat << EOF
+Enter size of swap partition. Format is given below, for example 2Gib
+Below table of recommendation is output of `free -h`
 Hibernation is not supported in this install script, so pick first column as recommendation
 https://itsfoss.com/swap-size/
 RAM Size    Swap Size (Without Hibernation)
@@ -40,7 +45,8 @@ RAM Size    Swap Size (Without Hibernation)
 64Gib        8Gib
 128Gib       11Gib
 EOF
-  read -s SWAP_PARTITION_SIZE
+  free -h
+  read SWAP_PARTITION_SIZE
   export SWAP_PARTITION_SIZE
 fi
 

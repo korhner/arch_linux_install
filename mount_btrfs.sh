@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 o=defaults,x-mount.mkdir
 o_btrfs=$o,compress=lzo,ssd,noatime
 mount -t btrfs -o subvol=@,$o_btrfs LABEL=system /mnt

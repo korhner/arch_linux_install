@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source ./utils.sh
 
 pretty_print "Install KDE"
