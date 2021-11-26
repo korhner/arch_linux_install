@@ -59,18 +59,18 @@ then
   export MICROCODE
 fi
 
-if [ -z "$USER" ]
+if [ -z "$USER_NAME" ]
 then
   echo "Set name of user"
-  read USER
-  export USER
+  read USER_NAME
+  export USER_NAME
 fi
 
-if [ -z "$HOSTNAME" ]
+if [ -z "$HOST_NAME" ]
 then
   echo "Set hostname"
-  read HOSTNAME
-  export HOSTNAME
+  read HOST_NAME
+  export HOST_NAME
 fi
 
 ########################################################################################################################
