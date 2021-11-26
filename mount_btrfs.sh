@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash -e
+#!/usr/bin/env bash
 
 o=defaults,x-mount.mkdir
 o_btrfs=$o,compress=lzo,ssd,noatime

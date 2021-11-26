@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash -e
+#!/usr/bin/env bash
 
 # REQUIREMENTS:
 # - connect to internet (either cable or run `iwctl` for wifi. more on https://wiki.archlinux.org/title/Iwd#iwctl)
@@ -12,4 +12,4 @@ source ./input.sh
 ./boot_${BOOT}.sh
 ./desktop_{$DESKTOP}.sh
 
-print "Installation successful, now reboot"
+pretty_print "Installation successful, now reboot"

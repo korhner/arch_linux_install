@@ -1,7 +1,7 @@
-#!/usr/bin/env -S bash -e
+#!/usr/bin/env bash
 
 source ./utils.sh
 
-print "Install KDE"
+pretty_print "Install KDE"
 pacstrap /mnt plasma sddm
 arch-chroot /mnt systemctl enable sddm

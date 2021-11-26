@@ -1,13 +1,13 @@
-#!/usr/bin/env -S bash -e
+#!/usr/bin/env bash
 
 source ./utils.sh
 source ./input.sh
 
-print "Install rEFInd"
+pretty_print "Install rEFInd"
 pacstrap /mnt refind
 arch-chroot /mnt refind-install
 
-print "Configure rEFInd update hook"
+pretty_print "Configure rEFInd update hook"
 mkdir -p /mnt/etc/pacman.d/hooks
 cat > /mnt/etc/pacman.d/hooks/refind.hook <<EOF
 [Trigger]
@@ -21,7 +21,7 @@ When=PostTransaction
 Exec=/usr/bin/refind-install
 EOF
 
-print "Configure rEFInd boot"
+pretty_print "Configure rEFInd boot"
 system_uuid=`blkid | grep 'LABEL="system"' | sed -r 's/.* UUID="([^"]+)".*/\1/'`
 cat <<END >/mnt/boot/refind_linux.conf
 "Boot with standard options"  "root=UUID=$system_uuid rw rootflags=subvol=root cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=$MICROCODE.img initrd=initramfs-%v.img"
