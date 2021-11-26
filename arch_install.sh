@@ -12,6 +12,6 @@ source ./input.sh
 ./mount_${FILESYSTEM}.sh
 ./base_linux.sh
 ./boot_${BOOT}.sh
-./desktop_{$DESKTOP}.sh
+./desktop_${DESKTOP}.sh
 
 pretty_print "Installation successful, now reboot"
