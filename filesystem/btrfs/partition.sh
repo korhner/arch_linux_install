@@ -2,8 +2,6 @@
 
 set -e
 
-source ../input.sh
-
 echo "Wiping $DISK_NAME."
 wipefs -af "$DISK_NAME"
 sgdisk -Zo "$DISK_NAME"
@@ -27,7 +25,7 @@ echo -n "$DISK_PASSWORD" | cryptsetup luksFormat --align-payload=8192 -s 256 -c 
 echo "Encrypt swap"
 mkfs.ext2 -L cryptswap /dev/disk/by-partlabel/cryptswap 1M
 
-./decrypt.sh
+$(dirname "$0")/decrypt.sh
 
 echo "Create and enable swap"
 mkswap -L swap /dev/mapper/swap

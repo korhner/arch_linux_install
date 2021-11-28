@@ -2,8 +2,6 @@
 
 set -e
 
-source ../input.sh
-
 echo "Configure rEFInd boot"
 system_uuid=`blkid | grep 'LABEL="system"' | sed -r 's/.* UUID="([^"]+)".*/\1/'`
 cat <<END >/mnt/boot/EFI/refind/refind.conf

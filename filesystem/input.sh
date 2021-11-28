@@ -2,6 +2,13 @@
 
 set -e
 
+if [ -z "$FILESYSTEM" ]
+then
+  echo "Insert filesystem. Supported values: $(ls filesystem)"
+  read FILESYSTEM
+  export FILESYSTEM
+fi
+
 if [ -z "$DISK_NAME" ]
 then
   lsblk -p

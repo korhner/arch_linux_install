@@ -2,8 +2,6 @@
 
 set -e
 
-source ./input.sh
-
 echo "Installing the base system"
 pacstrap /mnt base linux "$MICROCODE" linux-firmware
 
