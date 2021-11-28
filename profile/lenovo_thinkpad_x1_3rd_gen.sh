@@ -1,0 +1,1 @@
+export ADDITIONAL_PACKAGES="nvidia "
