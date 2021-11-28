@@ -20,3 +20,5 @@ Description = Updating rEFInd on ESP
 When=PostTransaction
 Exec=/usr/bin/refind-install
 EOF
+
+$(dirname "$0")/configure_"$FILESYSTEM".sh

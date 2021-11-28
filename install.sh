@@ -7,16 +7,14 @@ set -e
 
 source ./filesystem/input.sh
 source ./filesystem/"$FILESYSTEM"/input.sh
-./filesystem/"$FILESYSTEM"/partition.sh
-./filesystem/"$FILESYSTEM"/mount.sh
+./filesystem/"$FILESYSTEM"/install.sh
 
 source ./base/input.sh
-./base/base.sh
+./base/install.sh
 
 source ./bootloader/input.sh
 source ./bootloader/"$BOOT_LOADER"/input.sh
 ./bootloader/"$BOOT_LOADER"/install.sh
-./bootloader/"$BOOT_LOADER"/configure_"$FILESYSTEM".sh
 
 source ./desktop/input.sh
 source ./desktop/"$DESKTOP"/input.sh

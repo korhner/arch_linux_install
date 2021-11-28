@@ -45,6 +45,8 @@ btrfs subvolume create /mnt/@snapshots
 echo "Mount subvolumes"
 umount -R /mnt
 
+$(dirname "$0")/mount.sh
+
 echo "Generate fstab"
 genfstab -L /mnt >> /mnt/etc/fstab
 
