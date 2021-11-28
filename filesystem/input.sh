@@ -22,7 +22,8 @@ if [ -z "$SWAP_PARTITION_SIZE" ]
 then
   cat << EOF
 Enter size of swap partition. Format is given below, for example 2Gib
-Below table of recommendation is output of `free -h`
+Below table of recommendation is output of free -h:
+$(free -h)
 Hibernation is not supported in this install script, so pick first column as recommendation
 https://itsfoss.com/swap-size/
 RAM Size    Swap Size (Without Hibernation)
