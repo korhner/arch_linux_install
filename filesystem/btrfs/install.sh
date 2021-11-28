@@ -48,6 +48,7 @@ umount -R /mnt
 $(dirname "$0")/mount.sh
 
 echo "Generate fstab"
+mkdir -p /mnt/etc
 genfstab -L /mnt >> /mnt/etc/fstab
 
 echo "Swap will not have a LABEL on boot, so we replace that with the mapper path to swap"

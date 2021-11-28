@@ -15,16 +15,15 @@ timeout 3
 log_level 0
 
 use_nvram false
-scanfor manual
+scanfor external,manual
 menuentry "Arch Linux" {
-    icon     refind/icons/os_arch.png
-    volume   "Arch Linux"
-    loader   vmlinuz-linux
-    initrd   initramfs-linux.img
-    options  "root=UUID=$system_uuid rw rootflags=subvol=root cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=$MICROCODE.img"
+    icon     /EFI/refind/icons/os_arch.png
+    loader   /vmlinuz-linux
+    initrd   /initramfs-linux.img
+    options  "root=UUID=$system_uuid rw rootflags=subvol=root cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet \initrd=$MICROCODE.img"
 
     submenuentry "Boot using fallback initramfs" {
-        initrd initramfs-linux-fallback.img
+        initrd \initramfs-linux-fallback.img
     }
 
     submenuentry "Boot to terminal" {
