@@ -29,10 +29,10 @@ fi
 hypervisor=$(systemd-detect-virt)
 if [ "$hypervisor" == "oracle" ]
 then
-  print "VirtualBox has been detected."
-  print "Installing guest tools."
+  echo "VirtualBox has been detected."
+  echo "Installing guest tools."
   pacstrap /mnt virtualbox-guest-utils
-  print "Enabling specific services for the guest tools."
+  echo "Enabling specific services for the guest tools."
   systemctl enable vboxservice --root=/mnt
 fi
 

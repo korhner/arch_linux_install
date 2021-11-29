@@ -30,7 +30,7 @@ arch-chroot /mnt hwclock --systohc
 
 echo "Create user"
 arch-chroot /mnt useradd --create-home -G wheel "$USER_NAME"
-echo "$USER_NAME ALL=(ALL) ALL" >> /etc/sudoers.d/"$USER_NAME"
+echo "$USER_NAME ALL=(ALL) ALL" >> /mnt/etc/sudoers.d/"$USER_NAME"
 echo "$USER_NAME:$USER_PASSWORD" | arch-chroot /mnt chpasswd
 
 echo "Getting an ip address"
