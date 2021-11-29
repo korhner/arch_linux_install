@@ -19,6 +19,6 @@ then
   export DISK_PASSWORD
 fi
 
-./filesystem/"$FILESYSTEM"/mount.sh
 ./filesystem/"$FILESYSTEM"/decrypt.sh
+./filesystem/"$FILESYSTEM"/mount.sh
 

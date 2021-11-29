@@ -18,10 +18,10 @@ use_nvram false
 menuentry "Arch Linux" {
     icon     /EFI/refind/icons/os_arch.png
     loader   /vmlinuz-linux
-    options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\$MICROCODE.img initrd=\initramfs-linux.img"
+    options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\\\$MICROCODE.img initrd=\initramfs-linux.img"
 
     submenuentry "Boot using fallback initramfs" {
-        options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\$MICROCODE.img initrd=\initramfs-linux-fallback.img"
+        options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=PARTLABEL=cryptsystem:system cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\\\$MICROCODE.img initrd=\initramfs-linux-fallback.img"
     }
 
     submenuentry "Boot to terminal" {
