@@ -19,6 +19,7 @@ then
   export DISK_PASSWORD
 fi
 
-./filesystem/"$FILESYSTEM"/decrypt.sh
+source ./filesystem/"$FILESYSTEM"/input.sh
+echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptlvm -d -
 ./filesystem/"$FILESYSTEM"/mount.sh
 

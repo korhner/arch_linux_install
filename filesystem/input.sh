@@ -24,23 +24,19 @@ then
 Enter size of swap partition. Format is given below, for example 2Gib
 Below table of recommendation is output of free -h:
 $(free -h)
-Hibernation is not supported in this install script, so pick first column as recommendation
+
 https://itsfoss.com/swap-size/
-RAM Size    Swap Size (Without Hibernation)
-256Mib       256Mib
-512Mib       512Mib
-1Gib         1Gib
-2Gib         1Gib
-3Gib         2Gib
-4Gib         2Gib
-6Gib         2Gib
-8Gib         3Gib
-12Gib        3Gib
-16Gib        4Gib
-24Gib        5Gib
-32Gib        6Gib
-64Gib        8Gib
-128Gib       11Gib
+
+RAM Size	Swap Size  Swap size (With Hibernation)
+4Gib	      2Gib	   6Gib
+6Gib	      2Gib	   8Gib
+8Gib	      3Gib	   11Gib
+12Gib	      3Gib	   15Gib
+16Gib	      4Gib	   20Gib
+24Gib	      5Gib	   29Gib
+32Gib	      6Gib	   38Gib
+64Gib	      8Gib	   72Gib
+128Gib	    11Gib	   9Gib
 EOF
   free -h
   read SWAP_PARTITION_SIZE
