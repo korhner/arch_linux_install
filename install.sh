@@ -7,7 +7,7 @@ set -e
 
 source ./filesystem/input.sh
 source ./filesystem/"$FILESYSTEM"/input.sh
-./filesystem/"$FILESYSTEM"/install.sh
+./filesystem/install.sh
 
 source ./base/input.sh
 ./base/install.sh

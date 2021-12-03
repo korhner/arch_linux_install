@@ -28,13 +28,13 @@ mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 echo "Encrypt cryptsystem partition"
 echo -n "$DISK_PASSWORD" | cryptsetup luksFormat /dev/disk/by-partlabel/cryptlvm -d -
-echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptlvm -d -
+echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptlvm cryptlvm -d -
 
-echo "Create logicak volumes"
+echo "Create logical volumes"
 pvcreate /dev/mapper/cryptlvm
 vgcreate rootvg /dev/mapper/cryptlvm
 lvcreate -L "$SWAP_PARTITION_SIZE" rootvg -n swap
-lvcreate -L 100%FREE rootvg -n system
+lvcreate -l 100%FREE rootvg -n system
 
 echo "Create and enable swap"
 mkswap -L swap /dev/rootvg/swap
