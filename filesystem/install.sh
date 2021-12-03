@@ -42,7 +42,7 @@ swapon -L swap
 
 echo "Format system filesystem"
 $(dirname "$0")/$FILESYSTEM/format.sh
-$(dirname "$0")/mount.sh
+$(dirname "$0")/$FILESYSTEM/mount.sh
 
 echo "Generate fstab"
 mkdir -p /mnt/etc

@@ -12,3 +12,5 @@ echo "Create subvolumes"
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
+
+umount -R /mnt
