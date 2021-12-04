@@ -17,7 +17,7 @@ btrfs subvolume create /mnt/@swap
 umount -R /mnt
 
 echo "Create swap file"
-mount --mkdir -o subvol=@swap,X-mount.mkdir LABEL=system /mnt/swap
+mount -o subvol=@swap,X-mount.mkdir LABEL=system /mnt/swap
 touch /mnt/swap/swapfile
 chmod 600 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
