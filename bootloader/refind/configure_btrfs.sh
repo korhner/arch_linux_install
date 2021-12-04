@@ -3,7 +3,7 @@
 set -e
 
 echo "Configure rEFInd boot"
-system_uuid=`blkid | grep 'LABEL="system"' | sed -r 's/.* UUID="([^"]+)".*/\1/'`
+system_uuid=`blkid | grep 'PARTLABEL="cryptlvm"' | sed -r 's/.* UUID="([^"]+)".*/\1/'`
 cat <<END >/mnt/boot/EFI/refind/refind.conf
 timeout 3
 
@@ -18,10 +18,10 @@ use_nvram false
 menuentry "Arch Linux" {
     icon     /EFI/refind/icons/os_arch.png
     loader   /vmlinuz-linux
-    options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=/dev/rootvg/system:cryptlvm cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\\\$MICROCODE.img initrd=\initramfs-linux.img"
+    options  "root=/dev/mapper/cryptlvm rw rootflags=subvol=@ cryptdevice=UUID=$system_uuid:cryptlvm cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\$MICROCODE.img initrd=\initramfs-linux.img"
 
     submenuentry "Boot using fallback initramfs" {
-        options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=/dev/rootvg/system:cryptlvm cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\\\$MICROCODE.img initrd=\initramfs-linux-fallback.img"
+        options  "root=UUID=$system_uuid rw rootflags=subvol=@ cryptdevice=/dev/rootvg/system:cryptlvm cryptkey=PARTLABEL=decrypt:10240:256 quiet initrd=\\$MICROCODE.img initrd=\initramfs-linux-fallback.img"
     }
 
     submenuentry "Boot to terminal" {

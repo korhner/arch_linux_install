@@ -3,7 +3,7 @@
 set -e
 
 echo "Create BTRFS top subvolume"
-mkfs.btrfs --force --label system /dev/rootvg/system
+mkfs.btrfs --label system /dev/rootvg/system
 
 echo "Mount top level subvolume"
 mount -t btrfs LABEL=system /mnt
