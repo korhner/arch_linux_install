@@ -2,9 +2,8 @@
 
 set -e
 
-o=defaults,x-mount.mkdir
-o_btrfs=$o,compress=lzo,ssd,noatime
-mount -t btrfs -o subvol=@,$o_btrfs LABEL=system /mnt
-mount -t btrfs -o subvol=@home,$o_btrfs LABEL=system /mnt/home
-mount -t btrfs -o subvol=@snapshots,$o_btrfs LABEL=system /mnt/.snapshots
-mount -o $o LABEL=EFI /mnt/boot
+mount --mkdir -t btrfs -o subvol=@,defaults,compress=lzo,relatime LABEL=system /mnt
+mount --mkdir -t btrfs -o subvol=@home,defaults,compress=lzo,relatime LABEL=system /mnt/home
+mount --mkdir -t btrfs -o subvol=@snapshots,defaults,compress=lzo,relatime LABEL=system /mnt/.snapshots
+mount --mkdir -o defaults LABEL=EFI /mnt/boot
+

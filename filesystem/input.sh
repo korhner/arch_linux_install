@@ -18,29 +18,29 @@ then
   export DISK_NAME
 fi
 
-if [ -z "$SWAP_PARTITION_SIZE" ]
+if [ -z "$SWAP_PARTITION_SIZE_MB" ]
 then
   cat << EOF
-Enter size of swap partition. Format is given below, for example 2Gib
+Enter size of swap partition in megabytes, for example 4096 for 4GB.
 Below table of recommendation is output of free -h:
 $(free -h)
 
 https://itsfoss.com/swap-size/
 
-RAM Size	Swap Size  Swap size (With Hibernation)
-4Gib	      2Gib	   6Gib
-6Gib	      2Gib	   8Gib
-8Gib	      3Gib	   11Gib
-12Gib	      3Gib	   15Gib
-16Gib	      4Gib	   20Gib
-24Gib	      5Gib	   29Gib
-32Gib	      6Gib	   38Gib
-64Gib	      8Gib	   72Gib
-128Gib	    11Gib	   9Gib
+RAM Size	Swap Size
+4Gib	      2Gib (enter 2048)
+6Gib	      2Gib (enter 2048)
+8Gib	      3Gib (enter 3072)
+12Gib	      3Gib (enter 3072)
+16Gib	      4Gib (enter 4096)
+24Gib	      5Gib (enter 5120)
+32Gib	      6Gib (enter 6144)
+64Gib	      8Gib (enter 8192)
+128Gib	    11Gib (enter 11264)
 EOF
   free -h
-  read SWAP_PARTITION_SIZE
-  export SWAP_PARTITION_SIZE
+  read SWAP_PARTITION_SIZE_MB
+  export SWAP_PARTITION_SIZE_MB
 fi
 
 if [ -z "$DISK_PASSWORD" ]
