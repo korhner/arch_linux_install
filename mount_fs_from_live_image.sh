@@ -20,6 +20,6 @@ then
 fi
 
 source ./filesystem/"$FILESYSTEM"/input.sh
-echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptlvm cryptlvm -d -
+echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptsystem system -d -
 ./filesystem/"$FILESYSTEM"/mount.sh
 
