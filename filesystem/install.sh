@@ -26,7 +26,7 @@ echo "Format EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 echo "Encrypt cryptsystem partition"
-echo -n "$DISK_PASSWORD" | cryptsetup luksFormat /dev/disk/by-partlabel/crypsystem -d -
+echo -n "$DISK_PASSWORD" | cryptsetup luksFormat /dev/disk/by-partlabel/cryptsystem -d -
 echo -n "$DISK_PASSWORD" | cryptsetup open /dev/disk/by-partlabel/cryptsystem system -d -
 
 
