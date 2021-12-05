@@ -7,17 +7,19 @@ set -e
 
 source ./filesystem/input.sh
 source ./filesystem/"$FILESYSTEM"/input.sh
-./filesystem/install.sh
 
 source ./base/input.sh
-./base/install.sh
 
 source ./bootloader/input.sh
 source ./bootloader/"$BOOT_LOADER"/input.sh
-./bootloader/"$BOOT_LOADER"/install.sh
 
 source ./desktop/input.sh
 source ./desktop/"$DESKTOP"/input.sh
+
+./filesystem/install.sh
+./base/install.sh
+./filesystem/"$FILESYSTEM"/swap.sh
+./bootloader/"$BOOT_LOADER"/install.sh
 ./desktop/"$DESKTOP"/install.sh
 
 if [ -z "$ADDITIONAL_PACKAGES" ]
