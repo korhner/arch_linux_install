@@ -26,14 +26,4 @@ then
   pacstrap /mnt "$ADDITIONAL_PACKAGES"
 fi
 
-hypervisor=$(systemd-detect-virt)
-if [ "$hypervisor" == "oracle" ]
-then
-  echo "VirtualBox has been detected."
-  echo "Installing guest tools."
-  pacstrap /mnt virtualbox-guest-utils
-  echo "Enabling specific services for the guest tools."
-  systemctl enable vboxservice --root=/mnt
-fi
-
 echo "Installation successful, now reboot"
