@@ -108,17 +108,18 @@ btrfs subvolume create /mnt/@snapshots
 btrfs subvolume create /mnt/@swap
 umount -R /mnt
 
-mount -o defaults,X-mount.mkdir LABEL="$BOOT_PARTITION_NAME" /mnt/boot
+
 
 mount -o subvol=@,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt
 mount -o subvol=@home,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/home
 mount -o subvol=@snapshots,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/.snapshots
 mount -o subvol=@swap,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/swap
-
 touch /mnt/swap/swapfile
 chmod 600 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
 dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count="$swap_partition_size_mb"
+
+mount -o defaults,X-mount.mkdir LABEL="$BOOT_PARTITION_NAME" /mnt/boot
 
 echo "#################################################################################################################"
 echo "Setup base system"
