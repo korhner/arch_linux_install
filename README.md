@@ -10,10 +10,6 @@ Scripts for my personal use for automatic installation of Arch Linux
 - `cd arch_linux_install`
 - `./install.sh`
 
-## Customization
-
-Installation is heavily opinionated and tries to follow arch wiki guide principles. To see supported components, check `install.sh` file and corresponding scripts it invokes. Script will ask for user input where required, and `profile` folder contains some common profiles which can be included by running `source <profile>.sh`
-
 ## Booting into an installed system
 
 Sometimes, due to broken install or inability to boot the system, the only way to access filesystem and repair errors is by booting from live ISO image. To do so, boot as if installing a new system, but instead of running `install.sh`, run `mount_fs_from_live_image.sh`. This command will attempt to mount existing file system and provide a way to access it and fix the errors.
