@@ -113,11 +113,14 @@ umount -R /mnt
 mount -o subvol=@,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt
 mount -o subvol=@home,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/home
 mount -o subvol=@snapshots,defaults,compress=lzo,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/.snapshots
+
 mount -o subvol=@swap,X-mount.mkdir LABEL="$DECRYPTED_PARTITION_NAME" /mnt/swap
 touch /mnt/swap/swapfile
 chmod 600 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
 dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count="$swap_partition_size_mb"
+mkswap /mnt/swap/swapfile
+swapon /mnt/swap/swapfile
 
 mount -o defaults,X-mount.mkdir LABEL="$BOOT_PARTITION_NAME" /mnt/boot
 
@@ -126,8 +129,7 @@ echo "Setup base system"
 echo "#################################################################################################################"
 pacstrap /mnt base linux "$microcode" linux-firmware base-devel mkinitcpio networkmanager dhcpcd btrfs-progs
 
-arch-chroot /mnt mkswap /swap/swapfile
-arch-chroot /mnt swapon /swap/swapfile
+
 
 mkdir -p /mnt/etc
 genfstab -L /mnt >> /mnt/etc/fstab
@@ -180,6 +182,7 @@ timeout 3
 log_level 0
 
 use_nvram false
+scanfor manual
 menuentry "Arch Linux" {
     icon     /EFI/refind/icons/os_arch.png
     loader   /vmlinuz-linux
@@ -212,5 +215,5 @@ pacstrap /mnt plasma sddm konsole yakuake spectacle dolphin okular kate
 arch-chroot /mnt systemctl enable sddm
 
 # various cli tools
-zsh vim zsh zip unzip htop nload iftop git bind-tools
+pacstrap /mnt vim zsh zip unzip htop nload iftop git bind-tools
 
