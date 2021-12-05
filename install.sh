@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
-# disk_name, $disk_password, $microcode, $swap_partition_size_mb, $timezone, $user_name, $user_password, $host_name, $locale
-
-BOOT_PARTITION_NAME=EFI
+BOOT_PARTITION_NAME=ESP
 CRYPTED_PARTITION_NAME=cryptsystem
 DECRYPTED_PARTITION_NAME=system
 
@@ -153,7 +151,7 @@ arch-chroot /mnt systemctl enable NetworkManager
 echo "#################################################################################################################"
 echo "Setup rEFInd"
 echo "#################################################################################################################"
-pacstrap /mnt refind
+pacstrap /mnt gptfdisk refind
 arch-chroot /mnt refind-install
 rm -f /mnt/boot/refind_linux.conf  # we will configure using /boot/EFI/refind/refind.conf
 mkdir -p /mnt/etc/pacman.d/hooks
